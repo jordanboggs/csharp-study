@@ -1,29 +1,47 @@
-using System;
+  using System;
 
-namespace TreehouseDefense
-{
-  class Game
+  namespace TreehouseDefense
   {
-    public static void Main()
+    class Game
     {
-      Map map = new Map(8, 5);
-      
-      try
+      public static void Main()
       {
-        MapLocation mapLocation = new MapLocation(20, 20, map);
-      }
-      catch (OutOfBoundsException ex)
-      {
-        Console.WriteLine(ex);
-      }
-      catch (TreehouseDefenseException)
-      {
-        Console.WriteLine("Unhandled TreehouseDefenseException");
-      }
-      catch (Exception)
-      {
-        Console.WriteLine("Unhandled Exception");
+        Map map = new Map(8, 5);
+        
+        try
+        {
+          Path path = new Path(
+            new[] {
+              new MapLocation(0, 2, map),
+              new MapLocation(1, 2, map),
+              new MapLocation(2, 2, map),
+              new MapLocation(3, 2, map),
+              new MapLocation(4, 2, map),
+              new MapLocation(5, 2, map),
+              new MapLocation(6, 2, map),
+              new MapLocation(7, 2, map)          
+            }
+          );
+
+          MapLocation location = path.GetLocationAt(8);
+
+          if(location != null)
+          {
+            Console.WriteLine(location.X + "," + location.Y);
+          }
+        }
+        catch (OutOfBoundsException ex)
+        {
+          Console.WriteLine(ex);
+        }
+        catch (TreehouseDefenseException)
+        {
+          Console.WriteLine("Unhandled TreehouseDefenseException");
+        }
+        catch (Exception ex)
+        {
+          Console.WriteLine("Unhandled Exception: " + ex);
+        }
       }
     }
   }
-}
